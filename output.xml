@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.10.7 on win32)" generated="20221018 12:01:36.530" rpa="false" schemaversion="3">
+<suite id="s1" name="Blazemeter-Robot" source="d:\SoftwareTesting\blazemeter-robot">
+<kw name="Open Home page" library="flights_keywords" type="SETUP">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20221018 12:01:36.810" level="INFO">Opening browser 'Chrome' to base url 'http://blazedemo.com/'.</msg>
+<status status="PASS" starttime="20221018 12:01:36.809" endtime="20221018 12:01:38.721"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20221018 12:01:40.729" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20221018 12:01:38.721" endtime="20221018 12:01:40.729"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20221018 12:01:40.729" endtime="20221018 12:01:40.856"/>
+</kw>
+<status status="PASS" starttime="20221018 12:01:36.808" endtime="20221018 12:01:40.856"/>
+</kw>
+<suite id="s1-s1" name="Flights" source="d:\SoftwareTesting\blazemeter-robot\flights.robot">
+<test id="s1-s1-t1" name="The user can see welcome message" line="12">
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<arg>${welcome_message}</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<msg timestamp="20221018 12:01:40.877" level="INFO">Current page contains text 'Welcome to the Simple Travel Agency!'.</msg>
+<status status="PASS" starttime="20221018 12:01:40.862" endtime="20221018 12:01:40.877"/>
+</kw>
+<tag>Welcome_message</tag>
+<status status="PASS" starttime="20221018 12:01:40.861" endtime="20221018 12:01:40.878"/>
+</test>
+<test id="s1-s1-t2" name="The user can search for flights" line="15">
+<kw name="Select Departure City" library="flights_keywords">
+<arg>${departure_city}</arg>
+<kw name="Select From List By Value" library="SeleniumLibrary">
+<arg>xpath://select[@name='fromPort']</arg>
+<arg>${departure_city}</arg>
+<doc>Selects options from selection list ``locator`` by ``values``.</doc>
+<msg timestamp="20221018 12:01:40.882" level="INFO">Selecting options from selection list 'xpath://select[@name='fromPort']' by value Boston.</msg>
+<status status="PASS" starttime="20221018 12:01:40.881" endtime="20221018 12:01:40.941"/>
+</kw>
+<status status="PASS" starttime="20221018 12:01:40.880" endtime="20221018 12:01:40.941"/>
+</kw>
+<kw name="Select Destination City" library="flights_keywords">
+<arg>${destination_city}</arg>
+<kw name="Select From List By Value" library="SeleniumLibrary">
+<arg>xpath://select[@name='toPort']</arg>
+<arg>${destination_city}</arg>
+<doc>Selects options from selection list ``locator`` by ``values``.</doc>
+<msg timestamp="20221018 12:01:40.942" level="INFO">Selecting options from selection list 'xpath://select[@name='toPort']' by value Cairo.</msg>
+<status status="PASS" starttime="20221018 12:01:40.942" endtime="20221018 12:01:41.001"/>
+</kw>
+<status status="PASS" starttime="20221018 12:01:40.942" endtime="20221018 12:01:41.002"/>
+</kw>
+<kw name="Search For Flights" library="flights_keywords">
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>css:input[type='submit']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20221018 12:01:41.003" level="INFO">Clicking button 'css:input[type='submit']'.</msg>
+<status status="PASS" starttime="20221018 12:01:41.002" endtime="20221018 12:01:41.462"/>
+</kw>
+<status status="PASS" starttime="20221018 12:01:41.002" endtime="20221018 12:01:41.462"/>
+</kw>
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<arg>Flights from ${departure_city} to ${destination_city}</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<msg timestamp="20221018 12:01:41.476" level="INFO">Current page contains text 'Flights from Boston to Cairo'.</msg>
+<status status="PASS" starttime="20221018 12:01:41.463" endtime="20221018 12:01:41.476"/>
+</kw>
+<kw name="There are available Flights" library="flights_keywords">
+<kw name="Get WebElements" library="SeleniumLibrary">
+<var>@{flights}</var>
+<arg>css:table[class='table']&gt;tbody tr</arg>
+<doc>Returns a list of WebElement objects matching the ``locator``.</doc>
+<msg timestamp="20221018 12:01:41.485" level="INFO">@{flights} = [ &lt;selenium.webdriver.remote.webelement.WebElement (session="86553ef4d4ab3b7d0047dc983ab5e79e", element="e75f1198-0002-44be-ae67-cb7ae7d6c399")&gt; | &lt;selenium.webdriver.remote.webelement.WebElement (ses...</msg>
+<status status="PASS" starttime="20221018 12:01:41.476" endtime="20221018 12:01:41.485"/>
+</kw>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<arg>${flights}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<msg timestamp="20221018 12:01:41.486" level="INFO">Length is 5</msg>
+<status status="PASS" starttime="20221018 12:01:41.485" endtime="20221018 12:01:41.486"/>
+</kw>
+<status status="PASS" starttime="20221018 12:01:41.476" endtime="20221018 12:01:41.486"/>
+</kw>
+<tag>Search_flights</tag>
+<status status="PASS" starttime="20221018 12:01:40.880" endtime="20221018 12:01:41.486"/>
+</test>
+<test id="s1-s1-t3" name="The user can choose one of the flights" line="23">
+<kw name="Store flight information on separate variables" library="flights_keywords">
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${flight_number}</var>
+<arg>xpath://table[@class='table']/tbody/tr[3]/td[2]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20221018 12:01:41.511" level="INFO">${flight_number} = 9696</msg>
+<status status="PASS" starttime="20221018 12:01:41.490" endtime="20221018 12:01:41.512"/>
+</kw>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${airline}</var>
+<arg>xpath://table[@class='table']/tbody/tr[3]/td[3]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20221018 12:01:41.533" level="INFO">${airline} = Aer Lingus</msg>
+<status status="PASS" starttime="20221018 12:01:41.512" endtime="20221018 12:01:41.533"/>
+</kw>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${price}</var>
+<arg>xpath://table[@class='table']/tbody/tr[3]/td[5]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20221018 12:01:41.551" level="INFO">${price} = 8:22 PM</msg>
+<status status="PASS" starttime="20221018 12:01:41.533" endtime="20221018 12:01:41.551"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${flight_number}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20221018 12:01:41.551" level="INFO">${flight_number} = 9696</msg>
+<status status="PASS" starttime="20221018 12:01:41.551" endtime="20221018 12:01:41.551"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${airline}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20221018 12:01:41.551" level="INFO">${airline} = Aer Lingus</msg>
+<status status="PASS" starttime="20221018 12:01:41.551" endtime="20221018 12:01:41.551"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${price}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20221018 12:01:41.552" level="INFO">${price} = 8:22 PM</msg>
+<status status="PASS" starttime="20221018 12:01:41.551" endtime="20221018 12:01:41.552"/>
+</kw>
+<status status="PASS" starttime="20221018 12:01:41.489" endtime="20221018 12:01:41.552"/>
+</kw>
+<kw name="Choose the flight" library="flights_keywords">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath://table[@class='table']/tbody/tr[3]/td[1]/input</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20221018 12:01:41.553" level="INFO">Clicking element 'xpath://table[@class='table']/tbody/tr[3]/td[1]/input'.</msg>
+<status status="PASS" starttime="20221018 12:01:41.553" endtime="20221018 12:01:41.896"/>
+</kw>
+<status status="PASS" starttime="20221018 12:01:41.552" endtime="20221018 12:01:41.896"/>
+</kw>
+<tag>choose_flight</tag>
+<status status="PASS" starttime="20221018 12:01:41.488" endtime="20221018 12:01:41.897"/>
+</test>
+<test id="s1-s1-t4" name="The user can see the choosen flight details on purchase page" line="28">
+<kw name="Validate flight details" library="flights_keywords">
+<kw name="Create List" library="BuiltIn">
+<var>@{flight_details}</var>
+<arg>${flight_number}</arg>
+<arg>${airline}</arg>
+<arg>${price}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20221018 12:01:41.900" level="INFO">@{flight_details} = [ 9696 | Aer Lingus | 8:22 PM ]</msg>
+<status status="PASS" starttime="20221018 12:01:41.899" endtime="20221018 12:01:41.900"/>
+</kw>
+<for flavor="IN">
+<var>${flight_info}</var>
+<value>@{flight_details}</value>
+<iter>
+<var name="${flight_info}">9696</var>
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<arg>${flight_info}</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<msg timestamp="20221018 12:01:42.060" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-11.png"&gt;&lt;img src="selenium-screenshot-11.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20221018 12:01:42.061" level="FAIL">Page should have contained text '9696' but did not.</msg>
+<status status="FAIL" starttime="20221018 12:01:41.900" endtime="20221018 12:01:42.062"/>
+</kw>
+<status status="FAIL" starttime="20221018 12:01:41.900" endtime="20221018 12:01:42.064"/>
+</iter>
+<status status="FAIL" starttime="20221018 12:01:41.900" endtime="20221018 12:01:42.064"/>
+</for>
+<status status="FAIL" starttime="20221018 12:01:41.899" endtime="20221018 12:01:42.065"/>
+</kw>
+<kw name="Store the total price of the flight in new variable" library="flights_keywords">
+<status status="NOT RUN" starttime="20221018 12:01:42.065" endtime="20221018 12:01:42.066"/>
+</kw>
+<tag>flight_details</tag>
+<status status="FAIL" starttime="20221018 12:01:41.898" endtime="20221018 12:01:42.066">Page should have contained text '9696' but did not.</status>
+</test>
+<test id="s1-s1-t5" name="The user can purchase the flight" line="33">
+<kw name="Fill up the purchase form" library="flights_keywords">
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>xpath://*[@id="inputName"]</arg>
+<arg>Deepan</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221018 12:01:42.069" level="INFO">Typing text 'Deepan' into text field 'xpath://*[@id="inputName"]'.</msg>
+<status status="PASS" starttime="20221018 12:01:42.069" endtime="20221018 12:01:42.137"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>xpath://*[@id="address"]</arg>
+<arg>Visamaentie 25 E 45 A</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221018 12:01:42.137" level="INFO">Typing text 'Visamaentie 25 E 45 A' into text field 'xpath://*[@id="address"]'.</msg>
+<status status="PASS" starttime="20221018 12:01:42.137" endtime="20221018 12:01:42.241"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>xpath://*[@id="city"]</arg>
+<arg>Hamenlinna</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221018 12:01:42.242" level="INFO">Typing text 'Hamenlinna' into text field 'xpath://*[@id="city"]'.</msg>
+<status status="PASS" starttime="20221018 12:01:42.241" endtime="20221018 12:01:42.332"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>xpath://*[@id="state"]</arg>
+<arg>Kanta-Hame</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221018 12:01:42.333" level="INFO">Typing text 'Kanta-Hame' into text field 'xpath://*[@id="state"]'.</msg>
+<status status="PASS" starttime="20221018 12:01:42.333" endtime="20221018 12:01:42.410"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>xpath://*[@id="zipCode"]</arg>
+<arg>13100</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221018 12:01:42.410" level="INFO">Typing text '13100' into text field 'xpath://*[@id="zipCode"]'.</msg>
+<status status="PASS" starttime="20221018 12:01:42.410" endtime="20221018 12:01:42.482"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath://*[@id="cardType"]/option[3]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20221018 12:01:42.483" level="INFO">Clicking element 'xpath://*[@id="cardType"]/option[3]'.</msg>
+<status status="PASS" starttime="20221018 12:01:42.482" endtime="20221018 12:01:42.517"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>xpath://*[@id="creditCardNumber"]</arg>
+<arg>192000101010101</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221018 12:01:42.518" level="INFO">Typing text '192000101010101' into text field 'xpath://*[@id="creditCardNumber"]'.</msg>
+<status status="PASS" starttime="20221018 12:01:42.517" endtime="20221018 12:01:42.593"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>xpath://input[@name='creditCardMonth']</arg>
+<arg>10</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221018 12:01:42.594" level="INFO">Typing text '10' into text field 'xpath://input[@name='creditCardMonth']'.</msg>
+<status status="PASS" starttime="20221018 12:01:42.593" endtime="20221018 12:01:42.667"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>xpath://input[@name='creditCardYear']</arg>
+<arg>2026</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221018 12:01:42.667" level="INFO">Typing text '2026' into text field 'xpath://input[@name='creditCardYear']'.</msg>
+<status status="PASS" starttime="20221018 12:01:42.667" endtime="20221018 12:01:42.742"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>xpath://input[@name='nameOnCard']</arg>
+<arg>Deepan</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221018 12:01:42.742" level="INFO">Typing text 'Deepan' into text field 'xpath://input[@name='nameOnCard']'.</msg>
+<status status="PASS" starttime="20221018 12:01:42.742" endtime="20221018 12:01:42.818"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${credit_card_month}</var>
+<arg>xpath://*[@id="creditCardMonth"]</arg>
+<arg>value</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20221018 12:01:42.838" level="INFO">${credit_card_month} = 10</msg>
+<status status="PASS" starttime="20221018 12:01:42.818" endtime="20221018 12:01:42.838"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${credit_card_year}</var>
+<arg>xpath://*[@id="creditCardYear"]</arg>
+<arg>value</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20221018 12:01:42.859" level="INFO">${credit_card_year} = 2026</msg>
+<status status="PASS" starttime="20221018 12:01:42.838" endtime="20221018 12:01:42.859"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${credit_card_month}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20221018 12:01:42.860" level="INFO">${credit_card_month} = 10</msg>
+<status status="PASS" starttime="20221018 12:01:42.859" endtime="20221018 12:01:42.860"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${credit_card_year}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20221018 12:01:42.860" level="INFO">${credit_card_year} = 2026</msg>
+<status status="PASS" starttime="20221018 12:01:42.860" endtime="20221018 12:01:42.860"/>
+</kw>
+<status status="PASS" starttime="20221018 12:01:42.068" endtime="20221018 12:01:42.861"/>
+</kw>
+<kw name="Click rememberMe" library="flights_keywords">
+<kw name="Select Checkbox" library="SeleniumLibrary">
+<arg>rememberMe</arg>
+<doc>Selects the checkbox identified by ``locator``.</doc>
+<msg timestamp="20221018 12:01:42.862" level="INFO">Selecting checkbox 'rememberMe'.</msg>
+<status status="PASS" starttime="20221018 12:01:42.862" endtime="20221018 12:01:42.920"/>
+</kw>
+<status status="PASS" starttime="20221018 12:01:42.861" endtime="20221018 12:01:42.920"/>
+</kw>
+<kw name="Click purchase" library="flights_keywords">
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>css:input[type='submit']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20221018 12:01:42.921" level="INFO">Clicking button 'css:input[type='submit']'.</msg>
+<status status="PASS" starttime="20221018 12:01:42.920" endtime="20221018 12:01:43.268"/>
+</kw>
+<status status="PASS" starttime="20221018 12:01:42.920" endtime="20221018 12:01:43.269"/>
+</kw>
+<tag>flight_purchase</tag>
+<status status="PASS" starttime="20221018 12:01:42.068" endtime="20221018 12:01:43.270"/>
+</test>
+<test id="s1-s1-t6" name="The user can see message and payment information on confirmation page" line="39">
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<arg>Thank you for your purchase today!</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<msg timestamp="20221018 12:01:43.284" level="INFO">Current page contains text 'Thank you for your purchase today!'.</msg>
+<status status="PASS" starttime="20221018 12:01:43.272" endtime="20221018 12:01:43.284"/>
+</kw>
+<kw name="Verify purchase information" library="flights_keywords">
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${total_amount}</var>
+<arg>xpath://table[@class='table']/tbody/tr[3]/td[2]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20221018 12:01:43.302" level="INFO">${total_amount} = 555 USD</msg>
+<status status="PASS" starttime="20221018 12:01:43.285" endtime="20221018 12:01:43.302"/>
+</kw>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${expiration}</var>
+<arg>xpath://table[@class='table']/tbody/tr[5]/td[2]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20221018 12:01:43.320" level="INFO">${expiration} = 11 /2018</msg>
+<status status="PASS" starttime="20221018 12:01:43.302" endtime="20221018 12:01:43.320"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${expiration}</arg>
+<arg>${credit_card_month} /${credit_card_year}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<msg timestamp="20221018 12:01:43.321" level="FAIL">11 /2018 != 10 /2026</msg>
+<status status="FAIL" starttime="20221018 12:01:43.320" endtime="20221018 12:01:43.321"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${total_amount}</arg>
+<arg>${total_flight_price}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" starttime="20221018 12:01:43.321" endtime="20221018 12:01:43.321"/>
+</kw>
+<status status="FAIL" starttime="20221018 12:01:43.285" endtime="20221018 12:01:43.322"/>
+</kw>
+<tag>payment_info</tag>
+<status status="FAIL" starttime="20221018 12:01:43.271" endtime="20221018 12:01:43.323">11 /2018 != 10 /2026</status>
+</test>
+<status status="FAIL" starttime="20221018 12:01:40.856" endtime="20221018 12:01:43.324"/>
+</suite>
+<kw name="Close Browsers" library="flights_keywords" type="TEARDOWN">
+<kw name="Close All Browsers" library="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" starttime="20221018 12:01:43.327" endtime="20221018 12:01:45.441"/>
+</kw>
+<status status="PASS" starttime="20221018 12:01:43.326" endtime="20221018 12:01:45.442"/>
+</kw>
+<status status="FAIL" starttime="20221018 12:01:36.536" endtime="20221018 12:01:45.442"/>
+</suite>
+<statistics>
+<total>
+<stat pass="4" fail="2" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">choose_flight</stat>
+<stat pass="0" fail="1" skip="0">flight_details</stat>
+<stat pass="1" fail="0" skip="0">flight_purchase</stat>
+<stat pass="0" fail="1" skip="0">payment_info</stat>
+<stat pass="1" fail="0" skip="0">Search_flights</stat>
+<stat pass="1" fail="0" skip="0">Welcome_message</stat>
+</tag>
+<suite>
+<stat pass="4" fail="2" skip="0" id="s1" name="Blazemeter-Robot">Blazemeter-Robot</stat>
+<stat pass="4" fail="2" skip="0" id="s1-s1" name="Flights">Blazemeter-Robot.Flights</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
